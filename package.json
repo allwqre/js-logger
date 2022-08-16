@@ -1,0 +1,40 @@
+{
+  "name": "@allwqre/js-logger",
+  "version": "1.0.0",
+  "description": "Simple JavaScript/TypeScript logger.",
+  "main": "dist/index.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "scripts": {
+    "postinstall": ".scripts/postinstall.sh",
+    "prepublishOnly": ".scripts/prepublishOnly.sh",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allwqre/js-logger.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "TypeScript",
+    "Logger"
+  ],
+  "author": "allwqre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allwqre/js-logger/issues"
+  },
+  "homepage": "https://github.com/allwqre/js-logger#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

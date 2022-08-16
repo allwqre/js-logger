@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+BRANCH=$(git branch --show-current)
+[[ $BRANCH == *"_WIP" ]] && exit 0
+
+npx --no -- prettier -cu 'lib/**/*'
+npx --no -- eslint 'lib/**/*'
