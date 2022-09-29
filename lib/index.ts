@@ -1,6 +1,6 @@
-type ReceiverFn = <L>(log: L) => void | Promise<void>;
+type ReceiverFn<L> = (log: L) => void | Promise<void>;
 
-type Receivers = Readonly<Record<LogLevel, ReceiverFn>>;
+export type Receivers<L> = Readonly<Record<LogLevel, ReceiverFn<L>>>;
 
 export enum LogLevel {
   DEBUG,
@@ -10,12 +10,12 @@ export enum LogLevel {
   FATAL,
 }
 
-type Format<D, O> = (level: LogLevel, data: D) => O;
+export type Format<D, O> = (level: LogLevel, data: D) => O;
 
 const DEFAULT_LOGLEVEL: LogLevel = LogLevel.DEBUG;
 const DEFAULT_FORMAT = (level: LogLevel, data: string) =>
   `(${new Date().toUTCString()}) [${LogLevel[level]}] - ${data}`;
-const DEFAULT_RECEIVERS: Receivers = {
+const DEFAULT_RECEIVERS: Receivers<string> = {
   [LogLevel.DEBUG]: console.log,
   [LogLevel.INFO]: console.log,
   [LogLevel.WARN]: console.warn,
@@ -49,7 +49,7 @@ export class Logger<Args = string, Out = string> {
   constructor(
     private readonly loglevel: LogLevel = DEFAULT_LOGLEVEL,
     private readonly format: Format<Args, Out> = DEFAULT_FORMAT as unknown as Format<Args, Out>,
-    private readonly receivers: Receivers = DEFAULT_RECEIVERS,
+    private readonly receivers: Receivers<Out> = DEFAULT_RECEIVERS as unknown as Receivers<Out>,
   ) {}
 
   log = (level: LogLevel, data: Args) =>
