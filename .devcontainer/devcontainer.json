@@ -9,8 +9,5 @@
     "vscode": {
       "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
     }
-  },
-  "settings": {
-    "css.lint.unknownAtRules": "ignore"
   }
 }
