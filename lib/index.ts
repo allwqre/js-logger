@@ -1,4 +1,4 @@
-type ReceiverFn = (log: string) => void | Promise<void>;
+type ReceiverFn = <L>(log: L) => void | Promise<void>;
 
 type Receivers = Readonly<Record<LogLevel, ReceiverFn>>;
 
@@ -10,7 +10,7 @@ export enum LogLevel {
   FATAL,
 }
 
-type Format<D> = (level: LogLevel, data: D) => string;
+type Format<D> = (level: LogLevel, data: D) => unknown;
 
 const DEFAULT_LOGLEVEL: LogLevel = LogLevel.DEBUG;
 const DEFAULT_FORMAT = <D>(level: LogLevel, data: D) => `(${new Date().toUTCString()}) [${LogLevel[level]}] - ${data}`;
