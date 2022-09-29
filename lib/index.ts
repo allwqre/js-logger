@@ -51,8 +51,8 @@ export class Logger<D = string> {
     private readonly receivers: Receivers = DEFAULT_RECEIVERS,
   ) {}
 
-  log = async (level: LogLevel, data: D): Promise<void> =>
-    void (level >= this.loglevel && (await this.receivers[level]?.(this.format(level, data))));
+  log = (level: LogLevel, data: D) =>
+    void (level >= this.loglevel && this.receivers[level]?.(this.format(level, data)));
 
   DEBUG = (data: D) => this.log(LogLevel.DEBUG, data);
   INFO = (data: D) => this.log(LogLevel.INFO, data);
