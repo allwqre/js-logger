@@ -10,10 +10,10 @@ export enum LogLevel {
   FATAL,
 }
 
-type Format<O, D> = (level: LogLevel, data: D) => O;
+type Format<D, O> = (level: LogLevel, data: D) => O;
 
 const DEFAULT_LOGLEVEL: LogLevel = LogLevel.DEBUG;
-const DEFAULT_FORMAT = <D = string>(level: LogLevel, data: D) =>
+const DEFAULT_FORMAT = (level: LogLevel, data: unknown) =>
   `(${new Date().toUTCString()}) [${LogLevel[level]}] - ${data}`;
 const DEFAULT_RECEIVERS: Receivers = {
   [LogLevel.DEBUG]: console.log,
@@ -26,7 +26,7 @@ const DEFAULT_RECEIVERS: Receivers = {
 /**
  * @class Logger
  */
-export class Logger<D = string> {
+export class Logger<Args = string, Out = string> {
   /**
    * Create a new Logger.
    *
@@ -48,22 +48,22 @@ export class Logger<D = string> {
    */
   constructor(
     private readonly loglevel: LogLevel = DEFAULT_LOGLEVEL,
-    private readonly format: Format<unknown, D> = DEFAULT_FORMAT,
+    private readonly format: Format<Args, Out> = DEFAULT_FORMAT as Format<Args, Out>,
     private readonly receivers: Receivers = DEFAULT_RECEIVERS,
   ) {}
 
-  log = (level: LogLevel, data: D) =>
+  log = (level: LogLevel, data: Args) =>
     void (level >= this.loglevel && this.receivers[level]?.(this.format(level, data)));
 
-  DEBUG = (data: D) => this.log(LogLevel.DEBUG, data);
-  INFO = (data: D) => this.log(LogLevel.INFO, data);
-  WARN = (data: D) => this.log(LogLevel.WARN, data);
-  ERROR = (data: D) => this.log(LogLevel.ERROR, data);
-  FATAL = (data: D) => this.log(LogLevel.FATAL, data);
+  DEBUG = (data: Args) => this.log(LogLevel.DEBUG, data);
+  INFO = (data: Args) => this.log(LogLevel.INFO, data);
+  WARN = (data: Args) => this.log(LogLevel.WARN, data);
+  ERROR = (data: Args) => this.log(LogLevel.ERROR, data);
+  FATAL = (data: Args) => this.log(LogLevel.FATAL, data);
 
-  d = this.DEBUG;
-  i = this.INFO;
-  w = this.WARN;
-  e = this.ERROR;
-  f = this.FATAL;
+  d = (data: Args) => this.log(LogLevel.DEBUG, data);
+  i = (data: Args) => this.log(LogLevel.INFO, data);
+  w = (data: Args) => this.log(LogLevel.WARN, data);
+  e = (data: Args) => this.log(LogLevel.ERROR, data);
+  f = (data: Args) => this.log(LogLevel.FATAL, data);
 }
