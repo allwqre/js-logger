@@ -8,8 +8,8 @@
     "dist"
   ],
   "scripts": {
-    "postinstall": ".scripts/postinstall.sh",
-    "prepublishOnly": ".scripts/prepublishOnly.sh",
+    "prepare": "scripts/prepare.sh",
+    "prepublishOnly": "scripts/prepublishOnly.sh",
     "build": "tsc"
   },
   "repository": {
