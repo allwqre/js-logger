@@ -13,7 +13,7 @@ export enum LogLevel {
 type Format<D, O> = (level: LogLevel, data: D) => O;
 
 const DEFAULT_LOGLEVEL: LogLevel = LogLevel.DEBUG;
-const DEFAULT_FORMAT = (level: LogLevel, data: unknown) =>
+const DEFAULT_FORMAT = (level: LogLevel, data: string) =>
   `(${new Date().toUTCString()}) [${LogLevel[level]}] - ${data}`;
 const DEFAULT_RECEIVERS: Receivers = {
   [LogLevel.DEBUG]: console.log,
@@ -48,7 +48,7 @@ export class Logger<Args = string, Out = string> {
    */
   constructor(
     private readonly loglevel: LogLevel = DEFAULT_LOGLEVEL,
-    private readonly format: Format<Args, Out> = DEFAULT_FORMAT as Format<Args, Out>,
+    private readonly format: Format<Args, Out> = DEFAULT_FORMAT as unknown as Format<Args, Out>,
     private readonly receivers: Receivers = DEFAULT_RECEIVERS,
   ) {}
 
