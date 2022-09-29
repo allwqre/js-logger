@@ -1,10 +1,16 @@
 {
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Containerfile"
   },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
+  "workspaceFolder": "/workspace",
+  "runArgs": ["--userns=keep-id"],
   "customizations": {
     "vscode": {
-      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "eamodio.gitlens"]
+      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
     }
+  },
+  "settings": {
+    "css.lint.unknownAtRules": "ignore"
   }
 }
