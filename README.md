@@ -1,5 +1,5 @@
 <img src=".github/assets/banner.svg" />
-Simple JavaScript/TypeScript logger.
+Simple, no dependency JavaScript/TypeScript logger.
 
 ## Usage
 
@@ -31,11 +31,17 @@ const receivers = {
   [LogLevel.FATAL]: console.error,
 };
 
-const SomeLogger = new Logger<string>(loglevel, format, reveivers)
+const Log = new Logger<string>(loglevel, format, reveivers)
 
-SomeLogger.DEBUG('this is a debug message') // (Thu, 01 Jan 1970 00:00:00 GMT) [DEBUG] - this is a debug message
-SomeLogger.INFO('this is an info message') // (Thu, 01 Jan 1970 00:00:00 GMT) [INFO] - this is an info message
-SomeLogger.WARN('this is a warning message') // (Thu, 01 Jan 1970 00:00:00 GMT) [WARN] - this is a warning message
-SomeLogger.ERROR('this is an error message') // (Thu, 01 Jan 1970 00:00:00 GMT) [ERROR] - this is an error message
-SomeLogger.FATAL('this is a fatal message') // (Thu, 01 Jan 1970 00:00:00 GMT) [FATAL] - this is a fatal message
+Log.DEBUG('this is a debug message') // (Thu, 01 Jan 1970 00:00:00 GMT) [DEBUG] - this is a debug message
+Log.INFO('this is an info message') // (Thu, 01 Jan 1970 00:00:00 GMT) [INFO] - this is an info message
+Log.WARN('this is a warning message') // (Thu, 01 Jan 1970 00:00:00 GMT) [WARN] - this is a warning message
+Log.ERROR('this is an error message') // (Thu, 01 Jan 1970 00:00:00 GMT) [ERROR] - this is an error message
+Log.FATAL('this is a fatal message') // (Thu, 01 Jan 1970 00:00:00 GMT) [FATAL] - this is a fatal message
+
+Log.d('this is a debug message') // (Thu, 01 Jan 1970 00:00:00 GMT) [DEBUG] - this is a debug message
+Log.i('this is an info message') // (Thu, 01 Jan 1970 00:00:00 GMT) [INFO] - this is an info message
+Log.w('this is a warning message') // (Thu, 01 Jan 1970 00:00:00 GMT) [WARN] - this is a warning message
+Log.e('this is an error message') // (Thu, 01 Jan 1970 00:00:00 GMT) [ERROR] - this is an error message
+Log.f('this is a fatal message') // (Thu, 01 Jan 1970 00:00:00 GMT) [FATAL] - this is a fatal message
 ```

@@ -59,4 +59,10 @@ export class Logger<D = string> {
   WARN = (data: D) => this.log(LogLevel.WARN, data);
   ERROR = (data: D) => this.log(LogLevel.ERROR, data);
   FATAL = (data: D) => this.log(LogLevel.FATAL, data);
+
+  d = this.DEBUG;
+  i = this.INFO;
+  w = this.WARN;
+  e = this.ERROR;
+  f = this.FATAL;
 }
